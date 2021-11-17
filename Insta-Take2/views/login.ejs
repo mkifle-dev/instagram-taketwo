@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <title>InstaPet</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="img/logo.png" class='img-fluid w-100' alt="logo image">
+        </div>
+
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+
+          <form action="/login" method="post">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" name='email' id="email" class="form-control form-control-lg" />
+              <label class="form-label" for="email">Email address</label>  
+            </div>
+  
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" name='password' id="password" class="form-control form-control-lg" />
+              <label class="form-label" for="password">Password</label>
+              <% if (message.length > 0) { %>
+                <div class="alert alert-danger"><%= message %></div>
+              <% } %>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #0119fd">
+              <i class="fas fa-user"></i>Sign in
+            </button>
+  
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+            </div>
+  
+            <a class="btn btn-primary btn-lg btn-block" style="background-color: #5b6bff" href="/signup" role="button">
+                <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+
+

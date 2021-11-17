@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <title>InstaPet</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1>Feed</h1>
+        <a href="/profile">Profile</a>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+       
+        <div class="col-sm-6">
+          <h3>Posts</h3>
+          <ul class="messages">
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li id='<%= posts[i]._id %>' class="message">
+              <data-postId hidden><%= posts[i]._id %></data-postId>
+              <a href="/post/<%= posts[i]._id %>">
+                <h4><%= posts[i].caption %></h4>
+                <img src="<%= posts[i].img %>" alt="">
+                <a href="/page/<%= posts[i].postedBy %>"><%= posts[i].postedBy %></a>
+              </a> 
+              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i><%= posts[i].heart %></span>
+              <ul>
+                <% for(var c=0; c<comments.length; c++) {%>
+                  <% if(String(comments[c].forPost) === String(posts[i]._id)) {%>
+                    <li class="comments">
+                      <span><%= comments[c].postedBy %>:</span>
+                      <span><%= comments[c].comment %></span>
+                    </li>
+                  <% } %>
+                <% } %>
+              </ul> 
+              <form action="/comments" method="POST">
+                <input type='hidden' name='onPage' value='feed'>
+                <input type='hidden' name='forPost' value='<%= posts[i]._id %>'>
+                <input type="text" name="comment" placeholder="comment">
+                <button type="submit">Submit</button>
+              </form>
+            </li>
+          <% } %>
+          </ul>
+
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>

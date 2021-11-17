@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <title>InstaPet</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+  <div class="page-header text-center">
+    <h1><%= user.local.username %></h1>
+    <a href="/feed">Feed</a>
+    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+  </div>
+
+  <div class="row">
+      <ul class="messages">
+      <% for(var i=0; i<posts.length; i++) {%>
+        <li class="message">
+          <data-postId hidden><%= posts[i]._id %></data-postId>
+          <a href="/post/<%= posts[i]._id %>">
+            <h4><%= posts[i].caption %></h4>
+            <img src="<%= posts[i].img %>" alt="">
+          </a>  
+          <span><i class="fa fa-thumbs-up" aria-hidden="true"></i><%= posts[i].heart %></span>
+          <ul>
+          <% for(var c=0; c<comments.length; c++) {%>
+            <% if(String(comments[c].forPost) === String(posts[i]._id)) {%>
+              <li class="comments">
+                <span><%= comments[c].postedBy %>:</span>
+                <span><%= comments[c].comment %></span>
+              </li>
+            <% } %>
+          <% } %>
+          </ul>
+          <form action="/comments" method="POST">
+            <input type='hidden' name='onPage' value='profile'>
+            <input type='hidden' name='forPost' value='<%= posts[i]._id %>'>
+            <input type="text" name="comment" placeholder="comment">
+            <button type="submit">Submit</button>
+          </form>
+        </li>
+      <% } %>
+      </ul>
+
+      <h2>Create a Post</h2>
+      <% if (user.local.email) { %>
+        <form action="/posts" enctype="multipart/form-data" method="POST">
+          <input type="text" name="caption" placeholder="caption">
+          <input type="file" name="file-to-upload">
+          <button type="submit">Submit</button>
+        </form>
+      <% } %>
+  </div>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
